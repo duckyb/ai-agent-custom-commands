@@ -28,6 +28,18 @@ Welcome to your curated collection of Cursor commands! This repository contains 
 
 ### 🔬 **In-Depth Audits**
 
+#### `/css-guidelines`
+
+**SCSS Code Quality Audit: Styling Standards & Best Practices**
+
+![Language Support](https://img.shields.io/badge/Languages-SCSS%20%7C%20CSS-blue) ![Framework Support](https://img.shields.io/badge/Frameworks-All-green) ![Type](https://img.shields.io/badge/Type-In--Depth%20Audit-purple)
+
+- Comprehensive SCSS audit tool based on industry-standard CSS guidelines
+- Evaluates file organization (ITCSS structure), naming conventions (BEM), and code quality
+- Checks for proper variable usage, global variable references, and maintainability patterns
+- Includes detailed checklist covering structure, naming, formatting, and performance
+- Perfect for ensuring consistent styling practices and catching common SCSS anti-patterns
+
 #### `/component-smell-audit`
 
 **Angular Component Review: Architectural Integrity**
@@ -107,6 +119,7 @@ Welcome to your curated collection of Cursor commands! This repository contains 
 - **Start with `/onboarding`** when exploring a new codebase
 - **Use `/industry-standard-audit`** for comprehensive code reviews
 - **Apply `/component-smell-audit`** specifically for Angular component analysis
+- **Run `/css-guidelines-ai`** for SCSS code quality and styling consistency
 - **Run `/production-ready-audit`** before deploying to production
 - **Reference `/neff-flow`** when working with NEFF framework projects
 
