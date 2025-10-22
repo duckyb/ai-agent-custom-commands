@@ -59,6 +59,11 @@ export class TestEH extends EventHandler {
 
 **Event Types:** `emitInner()` (component), `emitOuter()` (layout), `emitGlobal()` (app-wide)
 
+**Event Prefixing:** Events are automatically prefixed by the framework:
+
+- When emitting: Use simple event names (e.g., `"searchresults"`)
+- When listening: Include layout/widget prefix (e.g., `"es-search-layout.searchresults"`)
+
 ### Widget vs Atomic Component Distinction
 
 **Widgets:** First-level components under layouts. Registered in config with IDs. Single `[data]` input, `(emit)` output. Managed by LayoutBuilder.
@@ -121,7 +126,10 @@ this.exclude(["widget3", "widget4"]).update(data); // All except specified
 
 **Flow:** Layout manages widgets → Widgets transform data → Atomic components use Angular patterns
 
-Events auto-prefixed with widget ID: `widget-1.event-name`
+**Event Naming:**
+
+- Inner events auto-prefixed with widget ID: `widget-1.event-name`
+- Outer events auto-prefixed with layout ID: `layout-id.event-name`
 
 ## Folder Structure
 
@@ -176,6 +184,17 @@ this.lb.widgets["search-bar"].component.inputValue = payload;
 this.one("search-bar").update({ inputValue: payload });
 ```
 
+### ❌ **Direct Data Source Access**
+
+```typescript
+// WRONG: Accessing widget data source directly
+const widgetDS = this.dataSource.one("widget").ds;
+widgetDS.updateSearchResults(results);
+
+// CORRECT: Use event-driven approach
+this.emitOuter("updatesearchresults", results);
+```
+
 ### ❌ **Bypassing Event System**
 
 ```typescript
@@ -184,6 +203,22 @@ this.lb.widgets["search-bar"].eventHandler.handleSearch(query);
 
 // CORRECT: Event-driven communication
 this.emitOuter("search", { query });
+```
+
+### ❌ **Incorrect Event Prefixing**
+
+```typescript
+// WRONG: Adding prefix when emitting
+this.emitOuter("es-search-layout.searchresults", results);
+
+// CORRECT: Framework auto-adds prefix
+this.emitOuter("searchresults", results);
+
+// WRONG: Missing prefix when listening
+case 'searchresults':
+
+// CORRECT: Include prefix when listening
+case 'es-search-layout.searchresults':
 ```
 
 ### ❌ **Circular Dependencies**
@@ -255,6 +290,8 @@ widgets: [
 6. **Naming conventions**: Auto-resolve classes
 7. **Widget vs Atomic**: Only first-level components are widgets
 8. **Data hierarchy**: Layout → Widget → Atomic
+9. **Event prefixing**: Framework auto-prefixes events (emit simple names, listen with prefixes)
+10. **No direct access**: Never access `.ds` or `.component` properties directly
 
 ## Widget Class Resolution
 
