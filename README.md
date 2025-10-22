@@ -100,7 +100,7 @@ Welcome to your curated collection of Cursor commands! This repository contains 
 
 ## 🎯 How to Use
 
-📚 **Need help with Cursor custom commands?** Check out the [Cursor Custom Commands Documentation](https://docs.cursor.com/features/custom-commands) for detailed setup and usage instructions.
+📚 **Need help with Cursor custom commands?** Check out the [Cursor Custom Commands Documentation](https://cursor.com/docs/agent/chat/commands#commands) for detailed setup and usage instructions.
 
 ## 💡 Pro Tips
 
