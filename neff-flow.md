@@ -59,6 +59,14 @@ export class TestEH extends EventHandler {
 
 **Event Types:** `emitInner()` (component), `emitOuter()` (layout), `emitGlobal()` (app-wide)
 
+### Widget vs Atomic Component Distinction
+
+**Widgets:** First-level components under layouts. Registered in config with IDs. Single `[data]` input, `(emit)` output. Managed by LayoutBuilder.
+
+**Atomic Components:** Nested within widgets. NOT registered as widgets. Multiple inputs/outputs. Traditional Angular patterns.
+
+Examples: `project-messaging` (widget) → `chat-message` (atomic), `diary-list` (widget) → `diary-element` (atomic)
+
 ### Widget Configuration
 
 - `id`: Unique identifier
@@ -78,17 +86,40 @@ this.exclude(["widget3", "widget4"]).update(data); // All except specified
 
 ### Component Interface Contract
 
+**Widgets:** Single `[data]` input, `(emit)` output
+
 ```html
-<test-component
-  [data]="lb.widgets['test'].ds.out$ | async"
-  (emit)="lb.widgets['test'].emit($event.type, $event.payload)"
->
-</test-component>
+<widget
+  [data]="lb.widgets['id'].ds.out$ | async"
+  (emit)="lb.widgets['id'].emit($event.type, $event.payload)"
+></widget>
 ```
 
-**Required:** Single `[data]` input, single `(emit)` output
+**Atomic Components:** Multiple inputs/outputs allowed
 
-### Event Naming Convention
+```html
+<atomic
+  [input1]="val1"
+  [input2]="val2"
+  (event1)="handler1($event)"
+  (event2)="handler2($event)"
+></atomic>
+```
+
+### Data Flow Patterns
+
+**Layout → Widget:** Framework methods (see Component Interface Contract above)
+**Widget → Atomic:** Traditional Angular binding
+
+```html
+<atomic
+  [data]="processedData"
+  [user]="user"
+  (event)="handleEvent($event)"
+></atomic>
+```
+
+**Flow:** Layout manages widgets → Widgets transform data → Atomic components use Angular patterns
 
 Events auto-prefixed with widget ID: `widget-1.event-name`
 
@@ -180,36 +211,50 @@ this.update(user); // Calls transform()
 ```typescript
 // WRONG: Multiple inputs, nested widgets
 @Component({
-  template: `<es-dropdown-select [emit]="subjectsEmit"></es-dropdown-select>`
+  template: `<es-dropdown-select [emit]="subjectsEmit"></es-dropdown-select>`,
 })
 export class Component {
   @Input() subjectsEmit: any; // ❌ Multiple inputs
   @Input() measuresEmit: any; // ❌ Violates contract
 }
 
-// CORRECT: Place widgets in layout template
-<es-dropdown-select [emit]="lb.widgets['subject-select'].emit"></es-dropdown-select>
-
-// OR: Implement custom UI directly
+// CORRECT: Place widgets in layout template (see Component Interface Contract)
+// OR: Implement atomic component directly
 @Component({
-  template: `<div (click)="onClick()">Custom dropdown</div>`
+  template: `<div (click)="onClick()">Custom dropdown</div>`,
 })
 export class Component {
-  @Input() data: any; // ✅ Single input
-  @Output() emit = new EventEmitter<any>(); // ✅ Single output
+  @Input() data: any; // ✅ Single input for widgets
+  @Output() emit = new EventEmitter<any>(); // ✅ Single output for widgets
 }
+```
+
+### ❌ **Treating Atomic Components as Widgets**
+
+```typescript
+// WRONG: Registering atomic components as widgets
+widgets: [
+  { id: "chat-message" }, // ❌ Atomic component shouldn't be widget
+  { id: "diary-element" }, // ❌ Atomic component shouldn't be widget
+];
+
+// CORRECT: Only first-level components are widgets
+widgets: [
+  { id: "project-messaging" }, // ✅ Widget contains chat-message
+  { id: "diary-list" }, // ✅ Widget contains diary-element
+];
 ```
 
 ## Key Principles
 
-1. **Use framework methods**: `this.one().update()`, `this.some().update()`, etc.
-2. **Event-driven architecture**: Use `emitInner()`, `emitOuter()`, `emitGlobal()`
-3. **Respect data transformation**: Let data sources handle processing through `transform()`
-4. **Keep widgets encapsulated**: Don't access widget internals directly
-5. **Use reactive streams**: Leverage `out$` BehaviorSubject for data flow
-6. **Follow naming conventions**: Let framework resolve classes automatically
-7. **Keep components simple**: Single `[data]` input and `(emit)` output
-8. **Place widgets in layout**: Don't nest widgets inside components
+1. **Framework methods**: `this.one().update()`, `this.some().update()`
+2. **Event-driven**: `emitInner()`, `emitOuter()`, `emitGlobal()`
+3. **Data transformation**: Use `transform()` method
+4. **Widget encapsulation**: Don't access widget internals
+5. **Reactive streams**: Use `out$` BehaviorSubject
+6. **Naming conventions**: Auto-resolve classes
+7. **Widget vs Atomic**: Only first-level components are widgets
+8. **Data hierarchy**: Layout → Widget → Atomic
 
 ## Widget Class Resolution
 
