@@ -66,7 +66,7 @@ export class TestEH extends EventHandler {
 
 ### Widget vs Atomic Component Distinction
 
-**Widgets:** First-level components under layouts. Registered in config with IDs. Single `[data]` input, `(emit)` output. Managed by LayoutBuilder.
+**Widgets:** First-level components under layouts. Registered in config with IDs. `[data]` and `[emit]` inputs. Managed by LayoutBuilder.
 
 **Atomic Components:** Nested within widgets. NOT registered as widgets. Multiple inputs/outputs. Traditional Angular patterns.
 
@@ -78,7 +78,7 @@ Examples: `project-messaging` (widget) → `chat-message` (atomic), `diary-list`
 - `dataSource`: Optional custom data source
 - `eventHandler`: Optional custom event handler
 - `options`: Configuration options
-- `hasStaticData`: Whether to trigger initial data load
+- `hasStaticData`: Whether to trigger initial data load (prefer to set to true and load empty or loading states)
 
 ### Layout Data Source Management
 
@@ -91,12 +91,12 @@ this.exclude(["widget3", "widget4"]).update(data); // All except specified
 
 ### Component Interface Contract
 
-**Widgets:** Single `[data]` input, `(emit)` output
+**Widgets:** `[data]` and `[emit]` inputs
 
 ```html
 <widget
   [data]="lb.widgets['id'].ds.out$ | async"
-  (emit)="lb.widgets['id'].emit($event.type, $event.payload)"
+  [emit]="lb.widgets['id'].emit"
 ></widget>
 ```
 

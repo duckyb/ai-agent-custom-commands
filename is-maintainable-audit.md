@@ -1,13 +1,44 @@
-## Code Quality Assurance: Maintainability & Architectural Integrity
+## Code Quality Health Check: Maintainability & Architectural Integrity
 
-Perform a rigorous, structural analysis of the provided source code to validate its adherence to best practices for **long-term maintainability** and resilience against **architectural erosion**. The objective is to proactively identify and mitigate systemic risks associated with **tight coupling** and **low cohesion**.
+Perform a rigorous analysis of the provided source code against 5 core dimensions.
 
-Specifically, the critique must prioritize the following dimensions, recommending refactoring operations where deficiencies are observed:
+### Phase 1: The Executive Summary & Score
 
-1.  **Modularity & Cohesion:** Assess component separation. Verify adherence to the **Single Responsibility Principle (SRP)** and evaluate the degree of **functional cohesion** within classes and modules.
-2.  **Coupling & Dependencies:** Quantify and minimize inter-component dependencies. Suggest strategies (e.g., dependency injection, abstract interfaces) to promote **loose coupling** and facilitate independent evolution of code units.
-3.  **Testability & Verification:** Analyze the structure for inherent testability. Identify code that presents barriers to effective **unit testing** (e.g., global state, hard-coded dependencies) and propose solutions to enable comprehensive **test coverage**.
-4.  **Clarity & Abstraction:** Evaluate the clarity of naming, the effectiveness of abstraction layers, and the consistency of documentation. Ensure the code's complexity does not exceed acceptable thresholds (e.g., **Cyclomatic Complexity**).
-5.  **Extensibility & Open/Closed Principle (OCP):** Determine the ease with which new features can be integrated or existing behaviors modified without altering core logic ("open for extension, closed for modification").
+Your FIRST response must be a concise "Health Check" report consisting of:
 
-The output must be a concise report detailing critical violations and proposing concrete **refactoring strategies** to enhance stability and reduce the **cost of change**.
+1. **Overall Maintainability Score:** (0-100/100)
+
+   - _90-100: Excellent (Clean, modular, testable)_
+   - _70-89: Good (Minor technical debt)_
+   - _50-69: Fair (Significant refactoring recommended)_
+   - _Below 50: Critical (Architectural erosion, high risk)_
+
+2. **Score Breakdown (Table):**
+   | Dimension | Score (1-10) | Primary Driver for Score |
+   | :--- | :--- | :--- |
+   | **Modularity & Cohesion** | | (e.g., SRP violations, god-classes) |
+   | **Coupling & Dependencies** | | (e.g., tight coupling, lack of DI) |
+   | **Testability** | | (e.g., global state, hard-coded logic) |
+   | **Clarity & Abstraction** | | (e.g., Cyclomatic complexity, naming) |
+   | **Extensibility (OCP)** | | (e.g., rigid structures, switch-case logic) |
+
+3. **Top 3 Critical Violations:** A bulleted list of the most severe issues that impacted the score.
+
+### Phase 2: The "Wait" Prompt
+
+After providing the table and the top 3 issues, STOP. Ask the user:
+**"Would you like the full Refactoring Roadmap and detailed technical breakdown for these items?"**
+
+---
+
+## Phase 3: The Full Audit (On-Demand Only)
+
+_Only provide this if the user says "Yes" or "Full Report"._
+
+Detail the specific refactoring operations for each dimension, focusing on:
+
+1. **Modularity:** Functional cohesion improvements.
+2. **Coupling:** Strategies for loose coupling (DI/Interfaces).
+3. **Testability:** Solutions to enable comprehensive coverage.
+4. **Clarity:** Naming and complexity reduction (e.g., simplifying nested logic).
+5. **Extensibility:** Applying OCP to reduce the future cost of change.
