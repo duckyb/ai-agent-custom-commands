@@ -4,6 +4,39 @@ Perform a comprehensive, technical audit of the provided code context to determi
 
 The analysis **must focus exclusively on operational risk, performance under load, and runtime stability**, ensuring the code is reliable, scalable, and secure enough for end-users.
 
+### Phase 1: The Executive Summary & Score
+
+Your FIRST response must be a concise "Health Check" report consisting of:
+
+1. **Overall Production Readiness Score:** (0-100/100)
+
+   - _90-100: Excellent (Production-ready, low operational risk)_
+   - _70-89: Good (Minor issues, acceptable for production with monitoring)_
+   - _50-69: Fair (Significant risks, requires fixes before production)_
+   - _Below 50: Critical (Not production-ready, high operational risk)_
+
+2. **Score Breakdown (Table):**
+   | Dimension | Score (1-10) | Primary Driver for Score |
+   | :--- | :--- | :--- |
+   | **Performance & Scaling** | | (e.g., algorithmic inefficiencies, N+1 queries) |
+   | **Concurrency & Thread Safety** | | (e.g., race conditions, deadlocks) |
+   | **Security Vulnerabilities** | | (e.g., injection flaws, insecure data handling) |
+   | **Error Resilience & Observability** | | (e.g., poor exception handling, inadequate logging) |
+   | **Dependency & Infrastructure Health** | | (e.g., CVEs, deprecated libraries, connection issues) |
+
+3. **Top 3 Critical Violations:** A bulleted list of the most severe issues that impacted the score.
+
+### Phase 2: The "Wait" Prompt
+
+After providing the table and the top 3 issues, STOP. Ask the user:
+**"Would you like the full Refactoring Roadmap and detailed technical breakdown for these items?"**
+
+---
+
+## Phase 3: The Full Audit (On-Demand Only)
+
+_Only provide this if the user says "Yes" or "Full Report"._
+
 Evaluate and critique the following critical dimensions of **Operational Health**:
 
 ---
