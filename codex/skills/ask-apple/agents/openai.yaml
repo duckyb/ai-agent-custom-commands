@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ask Apple"
+  short_description: "Apple design critique and direction"
+  default_prompt: "Use $ask-apple to review this interface through Apple design principles and the Human Interface Guidelines."
