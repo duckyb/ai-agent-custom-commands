@@ -1,3 +1,8 @@
+---
+name: is-maintainable-audit
+description: "Maintainability health check of source code: 0-100 score, 5-dimension breakdown (modularity, coupling, testability, clarity, extensibility), top 3 violations, then an on-demand full effort/impact audit. Use when the user asks if code is maintainable or wants a code quality audit."
+---
+
 ## Code Quality Health Check: Maintainability & Architectural Integrity
 
 Perform a rigorous analysis of the provided source code against 5 core dimensions.

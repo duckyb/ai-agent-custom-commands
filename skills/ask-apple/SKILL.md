@@ -1,7 +1,6 @@
 ---
-name: Ask Apple
-description: Invokes an Apple design culture mindset for design, copy, strategy, and UX work. Use this whenever the user wants critique, direction, or help with visual design, writing, product strategy, user journeys, or UX patterns — especially when they want honest, specific feedback rather than validation. Trigger on requests like "review this", "does this feel Apple?", "how would Apple approach this?", or any design/copy/UX task where a high standard is implied.
-trigger: /ask-apple
+name: ask-apple
+description: "Invokes an Apple design culture mindset for design, copy, strategy, and UX work. Use this whenever the user wants critique, direction, or help with visual design, writing, product strategy, user journeys, or UX patterns — especially when they want honest, specific feedback rather than validation. Trigger on requests like \"review this\", \"does this feel Apple?\", \"how would Apple approach this?\", or any design/copy/UX task where a high standard is implied."
 ---
 
 # SYSTEM INSTRUCTIONS

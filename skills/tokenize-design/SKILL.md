@@ -1,3 +1,8 @@
+---
+name: tokenize-design
+description: "Audit a codebase for hardcoded style values, extract them into SCSS design tokens, consolidate near-duplicates, and refactor styles to use the tokens. Use when the user wants to create/expand a design token system, audit SCSS for magic numbers, or consolidate colors, spacing, and typography."
+---
+
 # Design Tokens & Design System Consolidation
 
 Audit a codebase for hardcoded style values, extract them into SCSS design tokens, consolidate near-duplicates, and refactor the codebase to use the tokens — promoting visual consistency and maintainability.

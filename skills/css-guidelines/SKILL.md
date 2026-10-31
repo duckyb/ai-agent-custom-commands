@@ -1,3 +1,8 @@
+---
+name: css-guidelines
+description: "SCSS implementation guidelines and audit checklist (ITCSS structure, BEM-like naming, $space variable, nesting/specificity rules). Use when writing, reviewing, or auditing SCSS/CSS code."
+---
+
 # CSS Guidelines for AI Agents
 
 ## Purpose

@@ -1,3 +1,8 @@
+---
+name: neff-flow
+description: "Reference for NEFF (Net7 Frontend Framework) Angular development: LayoutBuilder, DataSources, EventHandlers, widget vs atomic components, event prefixing, and anti-patterns. Use when working on Angular code that uses NEFF/n7 layouts, widgets, data sources, or event handlers."
+---
+
 # NEFF Framework Flow Documentation
 
 NEFF (Net7 Frontend Framework) provides structured Angular development with clear separation between data management, event handling, and component composition.
