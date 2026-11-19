@@ -19,9 +19,9 @@ or removing a skill.
 |---|---|
 | `ask-apple` | Design, copy and UX review through an Apple design lens |
 | `css-guidelines` | SCSS rules and audit checklist |
-| `industry-standard` | One-line check against the stack's idiomatic patterns |
 | `is-maintainable-audit` | Maintainability score and audit |
 | `neff-flow` | NEFF (Net7 Frontend Framework) Angular reference |
+| `state-of-the-art` | Is this the current, idiomatic and efficient approach for the stack? Reviews a change, answers "what's the best way to do X", or audits a whole project. Verdict plus ranked gaps |
 | `tokenize-design` | Extract hardcoded SCSS values into design tokens |
 
 `skills/ask-apple/agents/openai.yaml` is Codex-only metadata; Claude Code
